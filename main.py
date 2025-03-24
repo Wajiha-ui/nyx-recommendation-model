@@ -2,8 +2,6 @@ import streamlit as st
 import pickle  # or torch, tensorflow, etc., based on your model
 import numpy as np
 import os
-from google.colab import files
-
 
 # Load the trained model
 @st.cache_resource
