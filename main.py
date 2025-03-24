@@ -1,13 +1,15 @@
 import streamlit as st
 import pickle  # or torch, tensorflow, etc., based on your model
 import numpy as np
+import os
 
 # Load the trained model
 @st.cache_resource
 def load_model():
-    with open("model.pkl", "rb") as f:  # Update filename if needed
+    model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
+    with open(model_path, "rb") as f:  # Ensure correct indentation
         model = pickle.load(f)
-    return model
+    return model  # Ensure return is correctly placed
 
 model = load_model()
 
