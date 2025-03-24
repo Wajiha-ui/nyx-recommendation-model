@@ -6,10 +6,15 @@ import os
 # Load the trained model
 @st.cache_resource
 def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
-    with open(model_path, "rb") as f:  # Ensure correct indentation
+    model_path = os.path.join(os.path.dirname(__file__), "size_recommender.pkl")  # Updated filename
+    print(f"Looking for model in: {model_path}")  # Debugging print
+    
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file not found at: {model_path}")
+
+    with open(model_path, "rb") as f:
         model = pickle.load(f)
-    return model  # Ensure return is correctly placed
+    return model
 
 model = load_model()
 
