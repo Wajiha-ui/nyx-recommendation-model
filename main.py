@@ -2,21 +2,23 @@ import streamlit as st
 import pickle  # or torch, tensorflow, etc., based on your model
 import numpy as np
 import os
+from google.colab import files
+
 
 # Load the trained model
 @st.cache_resource
-def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), "size_recommender.pkl")  # Updated filename
-    print(f"Looking for model in: {model_path}")  # Debugging print
-    
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found at: {model_path}")
+# Upload model manually if not already in Colab environment
+# files.upload()
 
+def load_model():
+    model_path = os.path.join(os.getcwd(), "size_recommender.pkl")  # Ensure this file is in your Colab session
     with open(model_path, "rb") as f:
         model = pickle.load(f)
     return model
 
 model = load_model()
+print("✅ Model loaded successfully in Colab!")
+
 
 # Streamlit UI
 st.title("AI Size Recommendation Model")
